@@ -17,7 +17,8 @@ public class TicketServiceImpl implements TicketService{
     TicketRepository ticketRepository;
 
     @Override
-    public Ticket getTicketById(long id) {
+    public Ticket getTicketById(String id) {
+
         return ticketRepository.findOne(id);
     }
 

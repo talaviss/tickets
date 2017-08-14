@@ -10,6 +10,6 @@ import com.amdocs.ticket.model.Ticket;
  */
 public interface TicketService {
 
-    Ticket getTicketById(long id);
+    Ticket getTicketById(String id);
     List<Ticket> getAllTickets();
 }

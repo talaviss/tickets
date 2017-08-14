@@ -7,7 +7,7 @@ import java.util.List;
 
 //@Repository("ticketRepository")
 
-public interface TicketRepository extends MongoRepository<Ticket, Long> {
+public interface TicketRepository extends MongoRepository<Ticket, String> {
     public List<Ticket> findByTitle(String title);
     public List<Ticket> findByDescription(String description);
 }
