@@ -3,6 +3,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import com.amdocs.ticket.repository.TicketRepository;
 import com.amdocs.ticket.model.Ticket;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.Before;
@@ -20,24 +21,24 @@ public class TicketApplicationTests {
 	@Autowired
 	TicketRepository repository;
 
-	Ticket dave, oliver, carter;
+
 
 	@Before
 	public void setUp() {
 
 		repository.deleteAll();
 
-		dave = repository.save(new Ticket("problem with phone lg4", "phone problem", true));
-		oliver = repository.save(new Ticket("Renew SLA", "SLA phone", true));
-		carter = repository.save(new Ticket("Wrong number on call", "phone problem", true));
+		repository.save(new Ticket("problem with phone lg4", "phone problem", true));
+		repository.save(new Ticket("Renew SLA", "SLA phone", true));
+		repository.save(new Ticket("Wrong number on call", "phone problem", true));
 	}
 
 	@Test
 	public void setsIdOnSave() {
 
-		Ticket dave = repository.save(new Ticket("the cat is on fire", "firecat", true));
+		Ticket ticket = repository.save(new Ticket("the cat is on fire", "firecat", true));
 
-		assertThat(dave.getId()).isNotNull();
+		assertThat(ticket.getId()).isNotNull();
 	}
 
 	@Test
@@ -56,6 +57,14 @@ public class TicketApplicationTests {
 		List<Ticket> result = repository.findAll(Example.of(probe));
 
 		assertThat(result).hasSize(2).extracting("description").contains("problem with phone lg4", "Wrong number on call");
+	}
+
+	@After
+	public void tearDown() {
+
+		repository.deleteAll();
+
+
 	}
 
 }
