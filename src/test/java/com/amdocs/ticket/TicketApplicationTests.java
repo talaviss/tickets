@@ -27,35 +27,35 @@ public class TicketApplicationTests {
 
 		repository.deleteAll();
 
-		dave = repository.save(new Ticket("Dave", "Matthews", true));
-		oliver = repository.save(new Ticket("Oliver August", "Matthews", true));
-		carter = repository.save(new Ticket("Carter", "Beauford", true));
+		dave = repository.save(new Ticket("problem with phone lg4", "phone problem", true));
+		oliver = repository.save(new Ticket("Renew SLA", "SLA phone", true));
+		carter = repository.save(new Ticket("Wrong number on call", "phone problem", true));
 	}
 
 	@Test
 	public void setsIdOnSave() {
 
-		Ticket dave = repository.save(new Ticket("Dave", "Matthews", true));
+		Ticket dave = repository.save(new Ticket("the cat is on fire", "firecat", true));
 
 		assertThat(dave.getId()).isNotNull();
 	}
 
 	@Test
-	public void findsByLastName() {
+	public void findsByDescription() {
 
-		List<Ticket> result = repository.findByDescription("Beauford");
+		List<Ticket> result = repository.findByDescription("Renew SLA");
 
-		assertThat(result).hasSize(1).extracting("firstName").contains("Carter");
+		assertThat(result).hasSize(1).extracting("description").contains("Renew SLA");
 	}
 
-	/*@Test
+	@Test
 	public void findsByExample() {
 
-		Ticket probe = new Ticket(null, "Matthews", true);
+		Ticket probe = new Ticket(null, "phone problem", true);
 
 		List<Ticket> result = repository.findAll(Example.of(probe));
 
-		assertThat(result).hasSize(2).extracting("firstName").contains("Dave", "Oliver August");
-	}*/
+		assertThat(result).hasSize(2).extracting("description").contains("problem with phone lg4", "Wrong number on call");
+	}
 
 }
