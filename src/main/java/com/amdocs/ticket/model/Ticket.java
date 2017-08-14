@@ -1,18 +1,18 @@
 package com.amdocs.ticket.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * Created by user on 14/08/2017.
  */
-@Entity
+//@Entity
+@Document(collection = "TICKETS")
 public class Ticket {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
     private String description;
     private String title;
     private boolean active;
@@ -30,11 +30,11 @@ public class Ticket {
     }
 
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -46,7 +46,12 @@ public class Ticket {
         this.description = desc;
     }
 
-
+    @Override
+    public String toString() {
+        return String.format(
+                "Ticket[id=%s, title='%s', description='%s']",
+                id, title, description);
+    }
 
 }
 
